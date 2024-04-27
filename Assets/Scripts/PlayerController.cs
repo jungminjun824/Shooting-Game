@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
         {
             weapon.StartFiring();
         }
-        else if (Input.GetKeyDown(keyCodeAttack))
+        else if (Input.GetKeyUp(keyCodeAttack))
         {
             weapon.StopFiring();
         }
