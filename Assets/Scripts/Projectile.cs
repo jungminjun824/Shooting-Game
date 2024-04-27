@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+    [SerializeField]
+    private int damage = 1;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Enemy"))
         {
-            // 부딪힌 오브젝트 삭제
-            Destroy(collision.gameObject);
+            collision.GetComponent<EnemyHp>().TakeDamage(damage);
             // 내 오브젝트 삭제
             Destroy(gameObject);
         }
