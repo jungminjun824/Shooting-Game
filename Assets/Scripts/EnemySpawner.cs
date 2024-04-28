@@ -14,6 +14,8 @@ public class EnemySpawner : MonoBehaviour
     private Transform canvasTransform;
     [SerializeField]
     private float spawnTime; //생성 주기
+    [SerializeField]
+    private int maxEnemyCount = 100; // 현재 스테이지의 최대 적 생성 숫자
     private void Awake()
     {
         StartCoroutine("SpawnEnemy");
@@ -21,6 +23,7 @@ public class EnemySpawner : MonoBehaviour
 
     private IEnumerator SpawnEnemy()
     {
+        int currentEnemtCount = 0;
         while (true)
         {
             float posisionX = Random.Range(stageData.LimitMin.x, stageData.LimitMax.x);
@@ -28,6 +31,12 @@ public class EnemySpawner : MonoBehaviour
             //적 캐릭터 생성
             GameObject enemyClone = Instantiate(enemyPrefab, position, Quaternion.identity);
             SpawnEnemyHPSlider(enemyClone);
+            currentEnemtCount++;
+            if(currentEnemtCount == maxEnemyCount)
+            {
+                StartCoroutine("SpawnBoss");
+                break;
+            }
             yield return new WaitForSeconds(spawnTime);
         }
     }
@@ -38,5 +47,10 @@ public class EnemySpawner : MonoBehaviour
         sliderClon.transform.localScale = Vector3.one;
         sliderClon.GetComponent<SliderPositionAutoSetter>().Setup(enemy.transform);
         sliderClon.GetComponent<EnemyHPViewer>().Setup(enemy.GetComponent<EnemyHp>());
+    }
+
+    private IEnumerator SpawnBoss()
+    {
+        yield return null;
     }
 }
