@@ -135,6 +135,10 @@ MonoBehaviour:
   damage: 1
   scorePoint: 100
   explosionPrefab: {fileID: 4894026497259185701, guid: b2d5d4d0d7b164444bcc2658fbe94de4, type: 3}
+  itemPrefabs:
+  - {fileID: 2263107347936902535, guid: f01bd9fc885cacc42b494904594b50c5, type: 3}
+  - {fileID: 5899608511708849564, guid: 5d39fe2eb644bb24595501f644bd9395, type: 3}
+  - {fileID: 5407035114722314449, guid: c37f72c15cef73f4dad3d7662497fb5b, type: 3}
 --- !u!114 &-2412323118909739440
 MonoBehaviour:
   m_ObjectHideFlags: 0

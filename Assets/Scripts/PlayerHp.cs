@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class PlayerHp : MonoBehaviour
@@ -11,6 +12,11 @@ public class PlayerHp : MonoBehaviour
     private PlayerController playerController;
 
     public float MaxHP => maxHP;
+    public float CurrentHp
+    {
+        set => currentHP = Mathf.Clamp(value, 0, maxHP);
+        get => currentHP;
+    }
     public float CurrentHP => currentHP;
     private void Awake()
     {
