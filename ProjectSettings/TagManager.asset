@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Enemy
   - Meteorite
+  - Undefined
+  - EnemyProjectile
+  - Boss
   layers:
   - Default
   - TransparentFX

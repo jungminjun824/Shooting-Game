@@ -13,11 +13,20 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField]
     private Transform canvasTransform;
     [SerializeField]
+    private GameObject textBossWarning;
+    [SerializeField]
+    private GameObject panelBossHP;
+    [SerializeField]
+    private GameObject boss;
+    [SerializeField]
     private float spawnTime; //생성 주기
     [SerializeField]
     private int maxEnemyCount = 100; // 현재 스테이지의 최대 적 생성 숫자
     private void Awake()
     {
+        textBossWarning.SetActive(false);
+        boss.SetActive(false);
+        panelBossHP.SetActive(false);
         StartCoroutine("SpawnEnemy");
     }
 
@@ -31,6 +40,7 @@ public class EnemySpawner : MonoBehaviour
             //적 캐릭터 생성
             GameObject enemyClone = Instantiate(enemyPrefab, position, Quaternion.identity);
             SpawnEnemyHPSlider(enemyClone);
+
             currentEnemtCount++;
             if(currentEnemtCount == maxEnemyCount)
             {
@@ -51,6 +61,16 @@ public class EnemySpawner : MonoBehaviour
 
     private IEnumerator SpawnBoss()
     {
-        yield return null;
+        textBossWarning.SetActive(true);
+
+        yield return new WaitForSeconds(1.0f);
+
+        textBossWarning.SetActive(false);
+
+        panelBossHP.SetActive(true);
+
+        boss.SetActive(true);
+
+        boss.GetComponent<Boss>().ChangeState(BossState.MoveToAppearPoint);
     }
 }

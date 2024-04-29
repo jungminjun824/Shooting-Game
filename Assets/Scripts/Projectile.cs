@@ -14,5 +14,11 @@ public class Projectile : MonoBehaviour
             // 내 오브젝트 삭제
             Destroy(gameObject);
         }
+        if (collision.CompareTag("Boss"))
+        {
+            collision.GetComponent<BossHP>().TakeDamage(damage);
+            // 내 오브젝트 삭제
+            Destroy(gameObject);
+        }
     }
 }
