@@ -8,6 +8,12 @@ public class Boss : MonoBehaviour
     [SerializeField]
     private StageData stageData;
     [SerializeField]
+    private GameObject explsionPrefab;
+    [SerializeField]
+    private PlayerController playerController;
+    [SerializeField]
+    private string nextSceneName;
+    [SerializeField]
     private float bossAppearPoint = 2.5f;
     private BossState bossState = BossState.MoveToAppearPoint;
     private Movement2D movement2D;
@@ -101,5 +107,12 @@ public class Boss : MonoBehaviour
 
             yield return null;
         }
+    }
+
+    public void OnDie()
+    {
+        GameObject clone = Instantiate(explsionPrefab, transform.position, Quaternion.identity);
+        clone.GetComponent<BossExplosion>().Setup(playerController, nextSceneName);
+        Destroy(gameObject);
     }
 }
